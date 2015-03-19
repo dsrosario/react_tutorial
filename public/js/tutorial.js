@@ -16,7 +16,8 @@ var CommentList = React.createClass({
 	render: function() {
 		return (
 			<div className="commentList">
-				Hello, world! I am a CommentList.
+				<Comment author="Pete Hunt">This is on comment</Comment>
+				<Comment author="Jordan Walke">This is *another* comment</Comment>
 			</div>
 		);
 	}
@@ -32,6 +33,7 @@ var CommentForm = React.createClass({
 	}
 });
 
+var converter = new Showdown.converter();
 var Comment = React.createClass({
 	render: function() {
 		return (
@@ -39,10 +41,10 @@ var Comment = React.createClass({
 				<h2 className="commentAuthor">
 					{this.props.author}
 				</h2>
-				{this.props.children}
+				{converter.makeHtml(this.props.children.toString())}
 			</div>
 		);
-	};
+	}
 });
 
 React.render(
